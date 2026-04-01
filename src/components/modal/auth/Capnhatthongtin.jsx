@@ -9,15 +9,14 @@ const Capnhatthongtin = ({
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
-  // 🔥 FIX: thêm open vào dependency
   useEffect(() => {
-  if (open && user) {
-    form.setFieldsValue({
-      fullName: `${user.firstName || ""} ${user.lastName || ""}`.trim(),
-      email: user.email || "",
-    });
-  }
-}, [open, user, form])
+    if (open && user) {
+      form.setFieldsValue({
+        fullName: `${user.firstName || ""} ${user.lastName || ""}`.trim(),
+        email: user.email || "",
+      });
+    }
+  }, [open, user, form]);
 
   const handleSubmit = async (values) => {
     try {
@@ -48,18 +47,12 @@ const Capnhatthongtin = ({
       width={500}
       destroyOnHidden
     >
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleSubmit}
-      >
+      <Form form={form} layout="vertical" onFinish={handleSubmit}>
         {/* FULL NAME */}
         <Form.Item
           label="Họ và tên"
           name="fullName"
-          rules={[
-            { required: true, message: "Vui lòng nhập họ và tên!" },
-          ]}
+          rules={[{ required: true, message: "Vui lòng nhập họ và tên!" }]}
         >
           <Input placeholder="Nhập họ và tên" size="large" />
         </Form.Item>
